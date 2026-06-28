@@ -117,7 +117,12 @@ function checkAuth(){
     document.getElementById('authPwd').value='';
   }
 }
-if(sessionStorage.getItem('_auth')==='1'){document.write('');}
+window.addEventListener('DOMContentLoaded',function(){
+  if(sessionStorage.getItem('_auth')==='1'){
+    var el=document.getElementById('authOverlay');
+    if(el)el.style.display='none';
+  }
+});
 </script>
 
 <div id="app"></div>
