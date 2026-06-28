@@ -84,26 +84,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 </style>
 </head>
 <body>
-
-<div id="_L" style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#6b1010,#8b1a1a);z-index:99999;display:flex;align-items:center;justify-content:center">
-<div style="background:#fff;border-radius:16px;padding:32px;max-width:360px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)">
-<h2 style="color:#8b1a1a">上博刷题系统</h2>
-<p style="color:#888;font-size:14px">请输入访问密码</p>
-<input id="_p" type="password" style="width:100%;padding:14px;border:2px solid #e0d8d0;border-radius:10px;font-size:16px;text-align:center;outline:none" placeholder="输入密码" onkeydown="if(event.key==='Enter')u()">
-<button onclick="u()" style="margin-top:12px;width:100%;padding:14px;background:#8b1a1a;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer">解锁</button>
-<p id="_e" style="color:#c41e3a;font-size:13px;margin-top:8px;display:none">密码错误</p>
-</div></div>
-<script>
-async function u(){
-  var t=new TextEncoder().encode(document.getElementById("_p").value);
-  var h=await crypto.subtle.digest("SHA-256",t);
-  var a=Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,"0")).join("");
-  if(a==="5b511a3e2f7ccae2e4677afed497b42bbfaac81720b284e96829a2b4e9da3232"){document.getElementById("_L").remove();sessionStorage.setItem("_a","1")}
-  else{document.getElementById("_e").style.display="block";document.getElementById("_p").value=""}
-}
-if(sessionStorage.getItem("_a")==="1")document.getElementById("_L").remove();
-</script>
-
 <div id="app"></div>
 <script>
 // ==================== 题目数据 ====================
