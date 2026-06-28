@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>上博刷题</title>
+<style>
+#L{position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#6b1010,#8b1a1a);z-index:99999;display:flex;align-items:center;justify-content:center}
+#LB{background:#fff;border-radius:16px;padding:32px;max-width:360px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+#LB h2{color:#8b1a1a;margin-bottom:8px}
+#LB input{width:100%;padding:14px;border:2px solid #e0d8d0;border-radius:10px;font-size:16px;text-align:center;outline:none}
+#LB button{margin-top:12px;width:100%;padding:14px;background:#8b1a1a;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer}
+#LE{color:#c41e3a;font-size:13px;margin-top:8px;display:none}
+</style></head>
+<body>
+<div id="L"><div id="LB"><h2>🏛️ 上博刷题</h2><p style="color:#888">输入密码</p><input id="P" type="password" placeholder="密码" onkeydown="if(event.key==='Enter')U()"><button onclick="U()">解锁</button><p id="LE">密码错误</p></div></div>
+<script>
+/* Password hash check */
+function h(s){var r=0;for(var i=0;i<s.length;i++){r=((r<<5)-r)+s.charCodeAt(i);r|=0}return Math.abs(r).toString(16)}
+function U(){if(h(document.getElementById('P').value)=='2e8a3d2f'){document.getElementById('L').remove();sessionStorage.setItem('_a','1')}else{document.getElementById('LE').style.display='block';document.getElementById('P').value=''}}
+if(sessionStorage.getItem('_a')=='1')document.getElementById('L').remove();
+</script>
+</body>
+</html>

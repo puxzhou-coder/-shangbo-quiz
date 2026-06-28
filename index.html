@@ -81,48 +81,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans G
 .text-center{text-align:center}
 .text-sub{color:var(--sub);font-size:13px}
 .badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;background:#fdf2f2;color:var(--accent)}
-
-<style>
-.auth-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#6b1010,#8b1a1a);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
-.auth-box{background:#fff;border-radius:16px;padding:32px 24px;max-width:360px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
-.auth-box h2{font-size:22px;color:#8b1a1a;margin-bottom:8px}
-.auth-box p{font-size:13px;color:#888;margin-bottom:20px}
-.auth-box input{width:100%;padding:14px;border:2px solid #e0d8d0;border-radius:10px;font-size:16px;text-align:center;letter-spacing:4px;outline:none;transition:border .2s}
-.auth-box input:focus{border-color:#8b1a1a}
-.auth-box .btn{margin-top:16px;width:100%;padding:14px;background:#8b1a1a;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer}
-.auth-error{color:#c41e3a;font-size:13px;margin-top:8px;display:none}
-</style>
-
 </style>
 </head>
 <body>
 
-<div class="auth-overlay" id="authOverlay">
-  <div class="auth-box">
-    <h2>🏛️ 上博刷题系统</h2>
-    <p>请输入密码访问</p>
-    <input type="password" id="authPwd" placeholder="输入密码" onkeydown="if(event.key==='Enter')checkAuth()">
-    <button class="btn" onclick="checkAuth()">解锁</button>
-    <div class="auth-error" id="authError">密码错误，请重试</div>
-  </div>
-</div>
+<div id="_L" style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#6b1010,#8b1a1a);z-index:99999;display:flex;align-items:center;justify-content:center">
+<div style="background:#fff;border-radius:16px;padding:32px;max-width:360px;width:90%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)">
+<h2 style="color:#8b1a1a">上博刷题系统</h2>
+<p style="color:#888;font-size:14px">请输入访问密码</p>
+<input id="_p" type="password" style="width:100%;padding:14px;border:2px solid #e0d8d0;border-radius:10px;font-size:16px;text-align:center;outline:none" placeholder="输入密码" onkeydown="if(event.key==='Enter')u()">
+<button onclick="u()" style="margin-top:12px;width:100%;padding:14px;background:#8b1a1a;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer">解锁</button>
+<p id="_e" style="color:#c41e3a;font-size:13px;margin-top:8px;display:none">密码错误</p>
+</div></div>
 <script>
-function checkAuth(){
-  var p=document.getElementById('authPwd').value;
-  if(p==='Pupu69076933'){
-    document.getElementById('authOverlay').style.display='none';
-    sessionStorage.setItem('_auth','1');
-  }else{
-    document.getElementById('authError').style.display='block';
-    document.getElementById('authPwd').value='';
-  }
+async function u(){
+  var t=new TextEncoder().encode(document.getElementById("_p").value);
+  var h=await crypto.subtle.digest("SHA-256",t);
+  var a=Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,"0")).join("");
+  if(a==="5b511a3e2f7ccae2e4677afed497b42bbfaac81720b284e96829a2b4e9da3232"){document.getElementById("_L").remove();sessionStorage.setItem("_a","1")}
+  else{document.getElementById("_e").style.display="block";document.getElementById("_p").value=""}
 }
-window.addEventListener('DOMContentLoaded',function(){
-  if(sessionStorage.getItem('_auth')==='1'){
-    var el=document.getElementById('authOverlay');
-    if(el)el.style.display='none';
-  }
-});
+if(sessionStorage.getItem("_a")==="1")document.getElementById("_L").remove();
 </script>
 
 <div id="app"></div>
@@ -1206,24 +1185,6 @@ function loadData(){
 }
 function saveData(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}
 let appData=loadData();
-// 预加载导入的备份数据
-(function(){
-  if(!appData._backupLoaded){
-    let backup={"answers": {"1": 1, "2": 1, "3": 1, "4": 2, "5": 1, "6": 2, "7": 1, "8": 1, "9": 1, "10": 2, "11": 2, "12": 1, "13": 1, "14": 1, "15": 3, "16": 3, "17": 1, "18": 0, "19": 1, "20": 2, "21": 1, "22": 1, "23": 2, "24": 2, "25": 2, "26": 1, "27": 2, "28": 1, "29": 2, "30": [0, 1, 2, 4], "31": 1, "32": 2, "33": 3, "34": 2, "35": 1, "36": 1, "37": 1, "38": 1, "39": 2, "40": 1, "41": 1, "42": 1, "43": 2, "44": 2, "45": 1, "46": 2, "47": 2, "48": 3, "49": 1, "50": 1, "51": 3, "52": [0, 1, 2, 3], "53": 3, "54": 1, "55": 1, "56": 3, "57": 1, "58": 2, "59": 0, "60": 2, "61": 1, "62": 3, "63": 2, "64": 1, "65": 1, "66": [0, 1, 2, 3, 4], "67": 2, "68": 1, "69": 4, "70": 0, "76": 1, "80": 2, "94": 1, "101": 2, "106": 1, "107": 0, "108": 1, "109": 0, "110": 2, "111": 5, "112": 3, "113": 1, "114": 0, "115": 2, "116": 1, "117": 2, "118": 0, "119": 1, "120": 1, "121": 1, "122": 2, "123": 1, "124": 2, "125": 1, "126": 2, "127": 2, "128": 1, "129": 3, "130": 2, "131": 1, "132": 1, "133": 3, "134": 1, "135": 1, "136": 1, "137": 1, "138": 1, "139": 4, "140": 4, "158": 0, "159": 1, "160": 1, "161": 1, "162": 1, "163": 1, "164": 2, "165": 1, "166": 1, "167": 2, "168": 1, "169": 2, "170": 0, "171": 1, "172": 1, "173": 1, "174": 2, "175": 0, "176": 1, "177": 1, "178": 1, "179": 1, "180": 1, "183": 0, "186": 0, "187": 1, "188": 1, "191": 2, "196": 1, "204": 2, "206": 1, "207": 2, "208": 1, "209": 2, "210": 1, "211": 1, "212": 2, "213": 2, "214": 2, "215": 2, "216": 1, "217": 1, "218": 1, "219": 3, "220": 2, "221": 3, "222": 3, "223": 2, "224": 3, "225": 2, "226": 2, "227": 2, "228": 2, "229": 2, "230": 1, "231": 2, "232": 1, "233": 1, "234": 1, "235": 2, "236": 1, "237": 1, "238": 1, "239": 1, "240": 2, "241": 0, "242": 1, "243": 2, "244": 1, "245": 1, "246": 2, "247": 1, "248": 1, "249": 2, "250": 2, "251": 0, "252": 1, "253": 1, "254": 1, "255": 1, "256": 3, "287": 1, "288": 1, "289": 1, "290": 0, "291": 1, "292": 0, "293": 3, "294": 0, "295": 2, "296": 2, "297": 1, "298": 1, "299": 1, "300": 1, "301": 3, "302": 0, "303": 3, "304": 0, "305": 3, "306": 1, "307": 1, "308": 1, "309": 1, "310": 1, "311": 3, "312": 1, "313": 4, "314": 2, "315": 1, "316": 1, "337": 1, "338": 3, "339": 3, "340": 0, "341": 2, "342": 1, "343": 1, "344": 1, "345": 2, "346": 1, "347": 1, "348": 2, "349": 1, "350": 2, "351": 1, "352": 0, "353": 1, "354": 1, "355": 1, "356": 1, "357": 1, "358": 1, "359": 1, "360": 3, "361": 1, "362": 2, "363": 3, "364": 1, "365": 1, "366": 2, "391": 1, "392": 2, "393": 4, "442": 1, "90000": 0, "90001": 3}, "favorites": {"17": true, "19": true, "32": true, "37": true, "38": true, "39": true, "41": true, "45": true, "46": true, "52": true, "53": true, "54": true, "55": true, "57": true, "58": true, "59": true, "64": true, "65": true, "66": true, "68": true, "70": true, "107": true, "108": true, "109": true, "112": true, "113": true, "114": true, "116": true, "117": true, "118": true, "119": true, "120": true, "122": true, "124": true, "126": true, "129": true, "130": true, "131": true, "134": true, "135": true, "140": true, "160": true, "161": true, "162": true, "163": true, "165": true, "166": true, "167": true, "170": true, "173": true, "174": true, "175": true, "177": true, "180": true, "183": true, "186": true, "207": true, "209": true, "210": true, "211": true, "213": true, "214": true, "216": true, "217": true, "218": true, "219": true, "220": true, "222": true, "223": true, "224": true, "225": true, "226": true, "227": true, "228": true, "229": true, "230": true, "231": true, "235": true, "239": true, "240": true, "241": true, "242": true, "243": true, "244": true, "245": true, "246": true, "247": true, "248": true, "250": true, "252": true, "254": true, "287": true, "288": true, "289": true, "290": true, "291": true, "292": true, "294": true, "295": true, "296": true, "301": true, "302": true, "303": true, "304": true, "306": true, "307": true, "308": true, "309": true, "310": true, "311": true, "313": true, "314": true, "337": true, "339": true, "340": true, "341": true, "342": true, "343": true, "344": true, "345": true, "346": true, "348": true, "349": true, "350": true, "351": true, "353": true, "354": true, "355": true, "360": true, "361": true, "362": true, "363": true, "364": true, "365": true, "366": true, "391": true, "393": true, "90001": true}, "wrongSet": {"32": true, "52": true, "61": true, "114": true, "133": true, "158": true, "170": true, "175": true, "183": true, "186": true, "187": true, "209": true, "210": true, "217": true, "219": true, "220": true, "222": true, "223": true, "224": true, "225": true, "226": true, "227": true, "231": true, "247": true, "248": true, "250": true, "294": true, "295": true, "302": true, "304": true, "313": true, "339": true, "344": true, "345": true, "363": true, "392": true}, "multiConfirmed": {"30": true, "52": true, "66": true}, "notes": [{"title": "2025十大考古发现", "content": "1.吉林长白山——旧石器时代——黑曜石（石器）意义：填补东亚史前空白\n2.河南裴李岗——新石器——红曲霉酿酒——中原最早酒、黍粟稻并存、“介”字形人面獠牙像\n3.河北郑家沟——红山文化——（不确定：最早龙玉龙）、高级墓葬、复杂祭祀、成熟玉礼器（玉龙、女神像、北方史前玉器）\n4.甘肃庆阳南佐遗址——仰韶文化晚期——规模最大保存最完好宫殿式建筑、中轴线（年代最早、最清晰都邑聚落中轴线）\n5.山西昔阳钟村——夏晚期——等级最高夏晚期贵族墓葬群、奢侈品（绿松石）\n6.河南郑州商城——商早期——毫都\n7.陕西富平长春遗址——西周中期—西周晚期——迄今为止单个西周墓地中墓葬数量最多，规模仅次于天马（曲村墓地）\n8.青岛琅琊台——秦——秦始皇东巡核心节点，最完整秦代东巡行宫遗址\n9.绍兴越国都城和汉六朝会稽郡遗址——春秋战国-六朝——遗址官署、南方传统干栏式+中原台基式建筑\n10.宁夏贺兰苏峪口瓷窑遗址——西夏——西夏官窑体系、完整匣钵（白瓷、青瓷、黑瓷）", "cat": "文博时政热点", "time": 1782639209332}], "customQuestions": [{"q": "河北郑家沟属于红山文化发掘了（不确定：最早龙玉龙）、高级墓葬、复杂祭祀、成熟玉礼器（玉龙、女神像、北方史前玉器）", "o": ["正确", "错误"], "a": 0, "exp": "河北郑家沟——红山文化——（不确定：最早龙玉龙）、高级墓葬、复杂祭祀、成熟玉礼器（玉龙、女神像、北方史前玉器）", "cat": "文博时政热点", "custom": true}, {"q": "陕西富平长春遗址发掘的意义是？", "o": ["大型商代部落", "未出土玉人龙合纹佩", "秦始皇东巡节点", "迄今为止单个西周墓地中墓葬数量最多规模仅次于天马（曲村墓地）"], "a": 3, "exp": "陕西富平长春遗址——西周中期—西周晚期——大型周代部落、迄今为止单个西周墓地中墓葬数量最多，规模仅次于天马（曲村墓地）、土玉人龙合纹佩", "cat": "文博时政热点", "custom": true}], "exportTime": "2026-06-28T10:45:22.395Z"};
-    if(backup.answers && Object.keys(backup.answers).length>0){
-      for(let k in backup.answers){ appData.answers[k]=backup.answers[k]; }
-      if(!appData._imported)appData._imported={};
-      appData._imported=true;
-    }
-    if(backup.favorites){ for(let k in backup.favorites){ appData.favorites[k]=backup.favorites[k]; } }
-    if(backup.wrongSet){ for(let k in backup.wrongSet){ appData.wrongSet[k]=backup.wrongSet[k]; } }
-    if(backup.multiConfirmed){ for(let k in backup.multiConfirmed){ appData.multiConfirmed[k]=backup.multiConfirmed[k]; } }
-    if(backup.notes && backup.notes.length>0){ appData.notes=backup.notes; }
-    if(backup.customQuestions && backup.customQuestions.length>0){ appData.customQuestions=backup.customQuestions; }
-    appData._backupLoaded=true;
-    saveData(appData);
-  }
-})();
 if(!appData.answers)appData.answers={};
 if(!appData.favorites)appData.favorites={};
 if(!appData.wrongSet)appData.wrongSet={};
